@@ -1,0 +1,4 @@
+[fal]
+# Copy this file to config.toml and paste your key. config.toml is gitignored.
+api_key = "PASTE_FAL_KEY_HERE"
+model = "fal-ai/flux/dev"
