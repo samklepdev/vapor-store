@@ -1,0 +1,20 @@
+# secrets & config
+tools/producer/config.toml
+.env
+*.key
+
+# generated image output (keep folder structure via .gitkeep, ignore contents)
+pipeline/02-raw/*
+!pipeline/02-raw/.gitkeep
+pipeline/05-packaged/*
+!pipeline/05-packaged/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# macOS
+.DS_Store
