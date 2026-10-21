@@ -210,25 +210,23 @@ class ComfyUIProvider:
     def _get_json(self, path: str) -> dict:
         return self._read_json(urllib.request.Request(self._base_url + path))
 
-    def _read_json(self, request: urllib.request.Request) -> dict:
+    def _open(self, url_or_request: str | urllib.request.Request) -> bytes:
         try:
-            with urllib.request.urlopen(request, timeout=self._request_timeout) as resp:  # noqa: S310 (local trusted URL)
-                return json.loads(resp.read())
+            with urllib.request.urlopen(url_or_request, timeout=self._request_timeout) as resp:  # noqa: S310 (local trusted URL)
+                return resp.read()
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode(errors="replace")
+            raise RuntimeError(
+                f"ComfyUI rejected the request (HTTP {exc.code}): {body}"
+            ) from exc
         except (urllib.error.URLError, TimeoutError) as exc:
-            msg = (
+            raise RuntimeError(
                 f"ComfyUI unreachable or unresponsive at {self._base_url} "
                 f"(is the server running?): {exc}"
-            )
-            raise RuntimeError(msg) from exc
+            ) from exc
+
+    def _read_json(self, request: urllib.request.Request) -> dict:
+        return json.loads(self._open(request))
 
     def _get_bytes(self, path: str) -> bytes:
-        try:
-            url = self._base_url + path
-            with urllib.request.urlopen(url, timeout=self._request_timeout) as resp:  # noqa: S310
-                return resp.read()
-        except (urllib.error.URLError, TimeoutError) as exc:
-            msg = (
-                f"ComfyUI unreachable or unresponsive at {self._base_url} "
-                f"(is the server running?): {exc}"
-            )
-            raise RuntimeError(msg) from exc
+        return self._open(self._base_url + path)

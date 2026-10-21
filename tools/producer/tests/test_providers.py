@@ -1,3 +1,5 @@
+import io
+import urllib.error
 import urllib.request
 
 import pytest
@@ -94,3 +96,21 @@ def test_timeout_surfaces_as_runtime_error(monkeypatch):
     monkeypatch.setattr(urllib.request, "urlopen", _boom)
     with pytest.raises(RuntimeError, match="unresponsive"):
         p._get_json("/history/x")
+
+
+def test_http_error_surfaces_comfyui_body(monkeypatch):
+    p = _provider()
+
+    def _raise_http_error(*args, **kwargs):
+        raise urllib.error.HTTPError(
+            url="http://127.0.0.1:8188/prompt",
+            code=400,
+            msg="Bad Request",
+            hdrs=None,
+            fp=io.BytesIO(b'{"node_errors": {"4": "checkpoint not found"}}'),
+        )
+
+    monkeypatch.setattr(urllib.request, "urlopen", _raise_http_error)
+    with pytest.raises(RuntimeError, match="rejected") as excinfo:
+        p._get_json("/prompt")
+    assert "checkpoint not found" in str(excinfo.value)
