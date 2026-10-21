@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-21 (updated)
 **Repo:** `/Users/sam/Projects/ai/vapor-studio` → `github.com/samklepdev/vapor-store` (**public**)
-**Default branch:** `main` (all work below is merged into it)
+**Default branch:** `main`
 **Owner:** Sam
 **For:** an OpenClaw-hosted agent (or next session) continuing after the M0/M1 core.
 
@@ -10,113 +10,114 @@
 
 ## TL;DR
 
-The **M0/M1 core tooling is built, tested, reviewed, and merged to `main`.** The
-producer can generate images two ways — **local ComfyUI/SDXL (free)** or
-**fal.ai/Flux (paid)** — and the **style bible aesthetics are owner-approved.**
-What remains is **entirely owner-driven**: your reference images, a live
-generation smoke test, and the creative/market work (Tasks 5–8).
+The **M0/M1 core tooling is built, tested, reviewed, and merged.** Local
+**ComfyUI/SDXL generation is proven live** (real images produced), the
+**style-bible aesthetics are owner-approved**, and a **print-resolution upscale
+pass** (Real-ESRGAN x4) is built. Work has moved into **M1 proper**: the owner
+has approved 6 battlestation keepers and the first Etsy listings are in prep.
+What remains is **owner-driven**: reference images, finishing/listing on Etsy,
+and the market-signal wait (Tasks 5–8).
 
 **Do not re-derive the project — read the committed artifacts:**
 - Design spec: `docs/specs/2026-10-20-vapor-studio-design.md`
 - M0/M1 plan: `docs/plans/2026-10-20-vapor-studio-m0-m1-foundation.md`
-- Local-provider spec + plan: `docs/specs/2026-10-21-comfyui-local-provider-design.md`, `docs/plans/2026-10-21-comfyui-local-provider.md`
-- **Operating workflow + M1 manual runbook + M2 handoff trigger: `docs/workflow.md`**
+- Local-provider spec + plan: `docs/specs/2026-10-21-comfyui-local-provider-*.md`
+- Upscale spec + plan: `docs/specs/2026-10-21-producer-upscale-design.md`, `docs/plans/2026-10-21-producer-upscale.md`
+- **Operating workflow + M1 runbook + M2 trigger: `docs/workflow.md`**
 - SDD progress ledger (source of truth): `.superpowers/sdd/progress.md`
 
 ---
 
-## What is DONE (merged to `main`)
+## What is DONE
 
 | Area | Status |
 |------|--------|
 | Repo scaffold + `.gitignore` + `verify-task-1.sh` | ✅ merged |
-| Producer core (`GenRequest`, `Provider` protocol, `run`/`save_batch`/`dated_output_dir`, CLI) | ✅ merged, TDD |
-| `FluxFalProvider` — Flux via fal.ai (paid) | ✅ merged (+ FAL_KEY + response-shape fixes) |
-| `ComfyUIProvider` — SDXL via local ComfyUI (free, resale-clean) | ✅ merged (PR #1), 14/14 tests, reviewed |
-| Config-driven provider selection (`[provider].kind` + `--provider` flag) | ✅ merged (PR #1) |
+| Producer core (`GenRequest`, `Provider`, `run`/`save_batch`/`dated_output_dir`, CLI) | ✅ merged, TDD |
+| `FluxFalProvider` — Flux via fal.ai (paid) | ✅ merged (FAL_KEY + response-shape fixes) |
+| `ComfyUIProvider` — SDXL via local ComfyUI (free, resale-clean) | ✅ merged, reviewed |
+| Config-driven provider selection (`[provider].kind` + `--provider`) | ✅ merged |
+| **ComfyUI generation proven live** | ✅ real 1024² PNGs generated (smoke + a 12-image battlestation batch) |
 | Style bible **format** + `ip-blocklist.md` | ✅ merged |
-| Style bible **aesthetics** — `vaporwave.md`, `psychedelia.md` | ✅ owner-approved, merged (PR #2) |
-
-Two PRs merged: **#1** (foundation + ComfyUI provider), **#2** (style-bible aesthetics).
+| Style bible **aesthetics** (`vaporwave.md`, `psychedelia.md`) | ✅ owner-approved, merged |
+| Private **reference-anchors area** (`style-bible/refs/`, gitignored) | ✅ merged |
+| **Upscale pass** (Real-ESRGAN x4, print-res) | ✅ built + reviewed Approved; live smoke + merge is the immediate next step (branch `producer-upscale`) |
 
 **Producer public interface (stable — the future M2 `producer` skill wraps it):**
-`GenRequest`, the `Provider` protocol, `FluxFalProvider`, `ComfyUIProvider`, and
-`dated_output_dir` / `save_batch` / `run` in `tools/producer/`. Select the
-backend via `config.toml` `[provider].kind` (`"comfyui"` | `"flux-fal"`) or
-`--provider`. Invoke as a module from repo root:
-`python -m tools.producer.generate --niche <slug> --prompt "..." --n 4`.
+`GenRequest`, `Provider`, `FluxFalProvider`, `ComfyUIProvider` (incl. `upscale()`),
+and `run`/`save_batch`/`dated_output_dir` in `tools/producer/`. Select backend via
+`config.toml` `[provider].kind` (`comfyui` | `flux-fal`) or `--provider`. Generate:
+`python -m tools.producer.generate --niche <slug> --prompt "..." --n 4`; upscale:
+`python -m tools.producer.upscale pipeline/04-approved/<file>.png`.
 
-**Environment:** venv at `tools/producer/.venv` (Python 3.15; pytest 9.1.1,
-ruff 0.17.1, fal-client installed). Run tests/lint from the repo root.
+**Environment:** venv at `tools/producer/.venv` (Python 3.15). Run tests/lint from repo root.
 
 ---
 
-## What is BLOCKED on the owner (the real outstanding work)
+## Live-ops notes (learned running it)
 
-### 1. Style bible **reference sets** — last piece of Task 2
-The aesthetic sections of `vaporwave.md` / `psychedelia.md` are owner-approved.
-Only the **Reference set** section of each is still `OWNER-TODO`: Sam must add
-paths to 5–10 of his own A-grade exemplars (local files, not redistributed
-assets) — private taste anchors the pre-QC step scores against.
-→ *Agent action when paths arrive:* wire them into the two files, commit.
+- **ComfyUI = Comfy Desktop at `127.0.0.1:8188`.** Checkpoints live in
+  `/Users/sam/ComfyUI-Shared/models/checkpoints/` (SDXL base installed),
+  upscale models in `.../models/upscale_models/` (`RealESRGAN_x4plus.pth` installed).
+- **The bash sandbox blocks loopback** — any command hitting ComfyUI must run
+  with the sandbox override, or it gets "connection refused" to localhost.
+- **ComfyUI can crash under sustained load** — it dropped mid-batch once (2 of a
+  12-image run failed). The producer surfaces this cleanly (`RuntimeError: ComfyUI
+  unreachable or unresponsive`), it recovers on its own, and failed prompts just
+  re-run. Watch for it on long batches (likely Mac memory pressure).
+- **Drafts are 1024² — not print-ready.** That's why the upscale pass exists:
+  1024² → 4096² (~27″ at 150 DPI). Wall-art listings use the upscaled masters.
 
-### 2. Live generation smoke test — pick a backend
-Neither backend has completed a live run yet:
-- **ComfyUI (free, preferred):** owner installs ComfyUI + an SDXL checkpoint,
-  starts the server, sets `[comfyui].checkpoint` in `config.toml`, then runs the
-  smoke test. This validates the live ComfyUI response shape — the one thing the
-  mocked tests can't prove. (`docs/plans/2026-10-21-comfyui-local-provider.md`, Task 3.)
-- **fal.ai (paid):** key is in `config.toml` (present, gitignored, not tracked).
-  Smoke test currently **blocked on account balance** — fal returned
-  `403 User is locked: Exhausted balance`. Top up at fal.ai/dashboard/billing to use it.
+---
 
-Smoke-test command (set `[provider].kind` first):
-```
-source tools/producer/.venv/bin/activate
-python -m tools.producer.generate --niche battlestation \
-  --prompt "retro-futurist chrome grid, sunset gradient, original art" --n 2
-```
-Expect 2 PNGs under `pipeline/02-raw/<today>/`.
+## What's left for the owner
 
-### 3. Tasks 5–8 — owner-driven creative/market work
-Produce/finish the battlestation batch (5), list on Etsy — human publishes per
-ToS (6), run the small stream-packs test (7), weekly go/no-go ritual (8). No
-agent can do these. See the M0/M1 plan for the runbooks.
+### 1. Finish the first battlestation Etsy listings (M1, in progress)
+6 keepers are approved in `pipeline/04-approved/` (`bs-night-neon-001`,
+`bs-chrome-statue-002`, `bs-pure-grid-001/002`, `bs-miami-dusk-001`,
+`bs-sunset-grid-001`). Plan: upscale each → print master → draft title/tags/
+description (+ AI disclosure) + mockup → **owner reviews, creates the Etsy
+listing, and publishes** (human-publish = ToS-clean). 6 separate listings.
+
+### 2. Style-bible reference sets
+Aesthetics approved; only the **Reference set** section of each file is
+`OWNER-TODO`. The gitignored `style-bible/refs/{vaporwave,psychedelia}/` folders
+are ready — owner drops 5–10 A-grade anchors per aesthetic (kept private; paths
+committed, images not). Agent wires the paths.
+
+### 3. Tasks 5–8 — creative/market
+Produce/finish the battlestation batch, list on Etsy, stream-packs test, weekly
+go/no-go. Watch signals; first sale + repeat interest is the M2 trigger.
+
+*(Secondary, non-blocking: regenerate the 2 psychedelia concepts — `ps-botanical`,
+`ps-cosmic` — that failed during the ComfyUI crash.)*
 
 ---
 
 ## The hard stop: do NOT build M2 yet
 
-M2 is the OpenClaw automation layer (brief-generator, pre-QC, producer skill,
-packager, etc.). Per the spec's prove-before-automate principle and the plan's
-**Task 8 gate**, M2 is **deliberately not built until a niche crosses "first
-sales + repeat interest."** An OpenClaw agent "continuing" this project should
-carry the owner-driven M1 tasks and hold — not start writing M2 skills — until
-that gate is hit. When it is, that triggers a *new* M2 plan. The producer's
-stable interface (above) is what that skill will wrap.
+M2 (the OpenClaw skills: brief-generator, pre-QC, producer skill, packager, etc.)
+is **not built until a niche crosses "first sales + repeat interest"** (spec
+prove-before-automate / Task 8 gate). Zero listings are live yet, so the trigger
+is nowhere near. Carry the owner-driven M1 tasks and hold. When the gate hits,
+that's a new M2 plan; the producer's stable interface (above) is what the skill wraps.
 
 ---
 
 ## Parked (non-blocking, spec §8)
 
 Messaging channel (Telegram vs WhatsApp), exact Claude model IDs for M2 (pin via
-the `claude-api` skill when M2 starts), and whether `~/Projects/ai/art-store`
-relates to this project.
+the `claude-api` skill when M2 starts), whether `~/Projects/ai/art-store` relates.
 
 ---
 
-## Notes for whoever takes over
+## Notes / guardrails
 
-- **License guard (important for resale):** local generation must use a
-  commercially-licensed checkpoint — **SDXL (OpenRAIL)** or **FLUX.1-schnell
-  (Apache-2.0)**. **Never run FLUX.1-dev locally for resale** (non-commercial
-  weights). Using fal.ai's hosted `flux/dev` is fine (their terms cover it).
-  This is documented in `config.example.toml`.
-- Earlier deferred fal findings are **resolved**: response-shape tolerance +
-  fail-loud (`result["images"]` or `data.images`) are in; the ComfyUI path got a
-  per-request timeout (no hang) and surfaces ComfyUI's HTTP error body.
-- Repo is **public** — no secrets are committed; `tools/producer/config.toml`
-  (holds the fal key) is gitignored and untracked. Keep it that way.
+- **License guard (resale):** local generation must use a commercially-licensed
+  model — **SDXL (OpenRAIL)**, **FLUX.1-schnell (Apache-2.0)**, or Real-ESRGAN x4
+  (BSD-3). **Never FLUX.1-dev locally for resale.** fal.ai's hosted `flux/dev` is fine.
+- **Repo is public** — no secrets committed; `tools/producer/config.toml` (fal key)
+  is gitignored and untracked. Keep it that way. Draft art in `pipeline/` stays local.
 
 ## Secrets
 
