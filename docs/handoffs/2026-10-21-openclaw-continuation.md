@@ -20,6 +20,7 @@ generation smoke test, and the creative/market work (Tasks 5–8).
 - Design spec: `docs/specs/2026-10-20-vapor-studio-design.md`
 - M0/M1 plan: `docs/plans/2026-10-20-vapor-studio-m0-m1-foundation.md`
 - Local-provider spec + plan: `docs/specs/2026-10-21-comfyui-local-provider-design.md`, `docs/plans/2026-10-21-comfyui-local-provider.md`
+- **Operating workflow + M1 manual runbook + M2 handoff trigger: `docs/workflow.md`**
 - SDD progress ledger (source of truth): `.superpowers/sdd/progress.md`
 
 ---
