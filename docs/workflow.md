@@ -87,15 +87,30 @@ each loop by hand:
 4. **Manual pre-QC (🚪 Gate 1)** — eyeball the raw output against the style bible;
    keep only ≥2-on-all-four; copy keepers to `pipeline/04-approved/`.
 5. **Finish** — hand-finish keepers in your own design tools (this is the edge).
-6. **Package** — export deliverables at correct dimensions + make mockups →
-   `pipeline/05-packaged/`; write the SEO title/description/tags.
-7. **Publish (🚪 Gate 2)** — create the Etsy listing yourself, with the honest AI
-   disclosure ("made with AI tools, designed and curated by Sam"). Human publish.
+6. **Upscale + package** — drafts are 1024² (not print-ready): run each keeper
+   through the upscale pass → ~4096² print master in `pipeline/05-packaged/<date>/`:
+   ```
+   python -m tools.producer.upscale pipeline/04-approved/<file>.png
+   ```
+   Then assemble the deliverable (print-res file(s) + a short "how to print" note),
+   a preview/mockup, and the title/description/tags.
+7. **Publish (🚪 Gate 2)** — list it yourself on the current sales channel, with
+   the honest AI disclosure ("made with AI tools, designed and curated by Sam").
+   Human publishes (ToS-clean). **Current M1 channel: Gumroad** (see note below).
 8. **Record** — note the listing + status in `listings/`.
 9. **Weekly** — read views/favorites/sales; kill the flat, fuel the winner.
 
 Guardrails apply the whole time: original-assets-only, honest AI disclosure,
-one shop built slowly, human on every outward action (`docs/specs/...` §4).
+built slowly, human on every outward action (`docs/specs/...` §4).
+
+### Sales channel (M1) — platform-flexible
+Only the *publish* step is platform-specific; the pipeline is channel-agnostic.
+**Current channel: Gumroad** — $0 to start, digital downloads, list immediately;
+drive traffic via free channels (r/battlestations, Pinterest, TikTok). **Etsy is
+deferred** until its ~$29 regional shop-setup fee is affordable (fund it from
+first earnings). Other fits: **itch.io** (stream/asset packs), **Redbubble /
+Society6** (POD physical wall art, $0, they print & ship). The M2 trigger
+("first sales + repeat interest") is measured on whichever channel is live.
 
 ---
 
