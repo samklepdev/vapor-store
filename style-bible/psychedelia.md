@@ -1,27 +1,47 @@
 # Psychedelia
 
-> **OWNER-TODO — this is the studio's core edge and cannot be ghost-written.**
-> Fill every section below from your own taste. Keep the headings exact — the
-> future pre-QC skill parses them. Delete this blockquote once filled.
-> Format reference: `style-bible/README.md`.
-
 ## Palette
-> OWNER-TODO: named colors + hex, and forbidden colors.
+Core (named + hex — saturated, jewel-and-acid, higher chroma and warmer than vaporwave):
+- `acid magenta #E6007E`
+- `electric violet #7A00FF`
+- `acid green #39FF14`
+- `molten gold #FFB800`
+- `blood orange #FF3C00`
+- `cosmic blue #1400C6`
+Base / ground: `void black #0A0014`, `bone white #FFF7E6`.
+Relationships: lean on complementary vibration (magenta↔green, violet↔gold) for the op-art shimmer; analogous warm runs (orange→magenta→violet) for flowing fields.
+
+Forbidden: muted/greyed-down tones; pastel washes (that's vaporwave's lane); low-contrast schemes that kill the figure-ground vibration.
 
 ## Motifs — use
-> OWNER-TODO: concrete recurring elements that belong (e.g. liquid-light swirls, fractal mandalas, melting type, kaleidoscopic symmetry).
+- Radial symmetry: mandalas, kaleidoscopic segments, concentric ripples
+- Liquid-light / oil-wheel blobs and marbled flow
+- Melting, warping, "breathing" distortion of forms and type
+- Paisley, fractals, sacred geometry, moiré/op-art line fields
+- Organic tendrils, botanical growth, eyes, mushrooms, cosmic/nebula depth
+- Continuous flowing linework that never quite rests
 
 ## Motifs — avoid
-> OWNER-TODO: clichés that read as lazy/generic in this style.
+- Flat tie-dye spiral slapped behind a subject with no integration
+- One-click "trippy" twirl/wave Photoshop filters with no composition
+- Recycled Alex-Grey / famous-poster knockoffs (IP risk + cliché)
+- Literal drug paraphernalia used as a shortcut for "psychedelic"
+- Generic rainbow gradient standing in for an actual color relationship
 
 ## Composition
-> OWNER-TODO: layout rules — focal point, negative space, symmetry, grain/texture.
+- Strong radial or mirror symmetry; a central hypnotic focal that pulls the eye in
+- Either dense all-over pattern OR a single focal with deep layered glow — commit to one
+- Deliberate figure-ground vibration (complementary edges) for movement
+- Continuous, flowing contours; avoid hard empty negative space (fill with rhythm)
+- High saturation with layered depth/bloom; target `1:1` or `4:5`
 
 ## Mood words
-> OWNER-TODO: 5–10 adjectives the piece must feel like.
+hypnotic · kaleidoscopic · transcendent · vibrant · organic · cosmic · swirling · euphoric · otherworldly · immersive
 
 ## Reference set
-> OWNER-TODO: 5–10 local exemplar paths you consider "A-grade" (do not link/redistribute others' assets).
+> OWNER-TODO (only you can supply this): paths to 5–10 of YOUR A-grade psychedelia
+> exemplars — local files in this repo or on your machine. Do not link or
+> redistribute other artists' work; these are private taste anchors for scoring.
 
 ## Pre-QC scoring rubric
 For each of Palette / Motifs / Composition / Mood: 0 = off, 1 = weak,
