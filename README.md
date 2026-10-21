@@ -11,7 +11,7 @@ OpenClaw runs the pipeline; the owner supplies taste at three approval gates.
 ## Image generation (local tool)
 
     cd tools/producer
-    python -m venv .venv && source .venv/bin/activate
+    python3 -m venv .venv && source .venv/bin/activate
     pip install -r requirements.txt
     cp config.example.toml config.toml   # add your fal.ai key
-    python generate.py --niche battlestation --prompt "..." --n 4
+    python3 generate.py --niche battlestation --prompt "..." --n 4
