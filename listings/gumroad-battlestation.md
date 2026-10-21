@@ -77,8 +77,18 @@ Square 4096×4096 PNG, print any size up to ~27″.
 5. Tags; set to **original art / personal-use** in your own words.
 6. **Publish**, then share the link on r/battlestations, Pinterest, TikTok.
 
-## Bundle option (recommended first sale)
-Instead of (or alongside) the 6 singles, make one product **"Vaporwave
-Battlestation Set — 6 Prints"**, attach all six `-4x.png` + the note, price ~$18.
-Bundles convert better cold and give a higher first-sale value; you can still sell
-singles later.
+## Bundle product (recommended first sale) — $18
+Attach all six `-4x.png` + `HOW-TO-PRINT.txt`. Bundles convert better cold and
+raise first-sale value; still sell singles alongside.
+
+**Title:** Vaporwave Battlestation Wall Art Set — 6 Neon Prints | Printable Digital Download
+**Description:**
+Kit out your whole wall in one drop. Six original vaporwave battlestation prints —
+neon grids, sunset horizons, chrome, CRT glow and retro desk setups — curated to
+hang together as a gallery wall or spread across a room. The complete VaporStudio42
+battlestation look for less than the price of three singles.
+**Included (6):** Neon Night Desk · Chrome & Marble · Grid & Chrome Dolphin (×2) ·
+Miami Dusk · Sunset Grid CRT. Each a square 4096×4096 px PNG, print-ready up to ~27″.
+Instant download; print at home or any print shop. *(+ shared disclosure)*
+**Tags:** vaporwave, synthwave, battlestation, wall art set, print bundle, desk setup,
+printable, retrowave, aesthetic, neon, digital download, gallery wall.
