@@ -21,3 +21,6 @@ __pycache__/
 
 # Idea
 .idea/
+# style-bible private reference anchors (external images; public repo -> never commit)
+style-bible/refs/*
+!style-bible/refs/README.md
