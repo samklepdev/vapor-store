@@ -5,7 +5,7 @@ import datetime as dt
 import tomllib
 from pathlib import Path
 
-from .providers import FluxFalProvider, GenRequest, Provider
+from .providers import ComfyUIProvider, FluxFalProvider, GenRequest, Provider
 
 
 def dated_output_dir(base: Path, today: dt.date | None = None) -> Path:
@@ -32,9 +32,15 @@ def run(
     return save_batch(images, dated_output_dir(raw_base, today), req.slug)
 
 
-def _load_fal(config_path: Path) -> FluxFalProvider:
-    cfg = tomllib.loads(config_path.read_text())["fal"]
-    return FluxFalProvider(api_key=cfg["api_key"], model=cfg.get("model", "fal-ai/flux/dev"))
+def _load_provider(cfg: dict, override: str | None = None) -> Provider:
+    kind = override or cfg.get("provider", {}).get("kind", "flux-fal")
+    if kind == "comfyui":
+        c = cfg["comfyui"]
+        return ComfyUIProvider(base_url=c["base_url"], checkpoint=c["checkpoint"])
+    if kind == "flux-fal":
+        f = cfg["fal"]
+        return FluxFalProvider(api_key=f["api_key"], model=f.get("model", "fal-ai/flux/dev"))
+    raise ValueError(f"unknown provider kind: {kind!r}")
 
 
 def main() -> None:
@@ -45,10 +51,13 @@ def main() -> None:
     ap.add_argument("--width", type=int, default=1024)
     ap.add_argument("--height", type=int, default=1024)
     ap.add_argument("--config", default="tools/producer/config.toml")
+    ap.add_argument("--provider", choices=["comfyui", "flux-fal"], default=None,
+                    help="override [provider].kind from config")
     ap.add_argument("--raw-base", default="pipeline/02-raw")
     args = ap.parse_args()
 
-    provider = _load_fal(Path(args.config))
+    cfg = tomllib.loads(Path(args.config).read_text())
+    provider = _load_provider(cfg, args.provider)
     req = GenRequest(
         prompt=args.prompt, width=args.width, height=args.height, n=args.n, slug=args.niche
     )

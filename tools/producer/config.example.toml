@@ -1,4 +1,18 @@
+# Producer configuration. Copy to config.toml and fill in. config.toml is gitignored.
+
+[provider]
+# Which backend generate.py uses: "comfyui" (local, free) or "flux-fal" (paid API).
+kind = "comfyui"
+
+[comfyui]
+# Local ComfyUI server. Start ComfyUI, then point this at it.
+base_url = "http://127.0.0.1:8188"
+# The checkpoint file in ComfyUI's models/checkpoints/.
+# LICENSE: local generation for resale must use a commercially-licensed model
+# (SDXL / FLUX.1-schnell). NEVER run FLUX.1-dev locally for resale (non-commercial weights).
+checkpoint = "sd_xl_base_1.0.safetensors"
+
 [fal]
-# Copy this file to config.toml and paste your key. config.toml is gitignored.
+# Only used when provider.kind = "flux-fal". Paid per image.
 api_key = "PASTE_FAL_KEY_HERE"
 model = "fal-ai/flux/dev"
