@@ -1,5 +1,6 @@
 # Gumroad listings — battlestation vaporwave wall art (2026-10-21)
 
+**Brand:** VaporStudio42 (one shop, two collections — vaporwave + psychedelia).
 **Channel:** Gumroad ($0 to start). **Status:** drafted, awaiting owner upload + publish.
 **Product files to attach to each:** the matching `…-4x.png` (4096²) from
 `pipeline/05-packaged/2026-10-21/` + `HOW-TO-PRINT.txt` (same folder).
@@ -7,9 +8,10 @@
 > *Made with AI tools, designed and curated by Sam. Original art — no trademarks,
 > logos, or third-party characters. Digital download for personal use.*
 
-**Pricing suggestion:** $5 each single, or a **6-print set at $18** (bundle is
-often the easiest first sale on Gumroad — see note at bottom). Format for all:
-square 4096×4096 px PNG, print-ready.
+**Pricing:** $5 per single (or "pay-what-you-want, $5+"); **3-print mini-set $10**;
+**6-print battlestation set $18** (anchor bundle). Launch tactic: a ~30%-off code
+(or a $3 intro single) for week 1 to seed first sales + reviews. Format: square
+4096×4096 px PNG, print-ready. Gumroad takes ~10%.
 
 **Tags (reuse/trim per product):** vaporwave, synthwave, retrowave, battlestation,
 desk setup, wall art, printable, digital download, aesthetic, neon, 80s retro, outrun.
