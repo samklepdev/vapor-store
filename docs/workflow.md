@@ -33,6 +33,26 @@ focused min/day at the gates.**
 
 ---
 
+## Two folder systems: `refs/` (set once) vs. `pipeline/` (every batch)
+
+Easy to conflate — they are not the same loop.
+
+- **`style-bible/refs/` — reference sets. Built ONCE.** Fixed taste anchors
+  (5–10 per aesthetic) that pre-QC and the owner judge every draft against.
+  Reused indefinitely; refreshed only occasionally if taste drifts. **Not**
+  rebuilt per batch.
+- **`pipeline/02-raw → 04-approved → 05-packaged` — production flow. EVERY batch.**
+  Each run: raw generations land in `02-raw/<date>/`; the owner promotes keepers
+  to `04-approved/` (**Gate 1**); the machine packages to `05-packaged/`.
+
+The "pick the good ones" decision in the pipeline is **permanent and always the
+owner's** — it is Gate 1, the taste moat, and is never automated. What M2 removes
+is only the *grunt-sifting before it*: `pre-qc` auto-kills obvious failures and
+hands over a contact sheet of survivors (`03-contact-sheets/`), so the owner
+judges a short pre-filtered set (seconds) instead of wading through all raw output.
+
+---
+
 ## What's built now vs. deferred
 
 **Built (M0):**
