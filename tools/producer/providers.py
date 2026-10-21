@@ -98,6 +98,7 @@ class ComfyUIProvider:
         negative: str = "",
         poll_interval: float = 1.0,
         timeout: float = 600.0,
+        request_timeout: float = 30.0,
     ) -> None:
         self._base_url = base_url.rstrip("/")
         self._checkpoint = checkpoint
@@ -108,6 +109,7 @@ class ComfyUIProvider:
         self._negative = negative
         self._poll_interval = poll_interval
         self._timeout = timeout
+        self._request_timeout = request_timeout
         self._client_id = str(uuid.uuid4())
 
     def generate(self, req: GenRequest) -> list[bytes]:
@@ -210,18 +212,23 @@ class ComfyUIProvider:
 
     def _read_json(self, request: urllib.request.Request) -> dict:
         try:
-            with urllib.request.urlopen(request) as resp:  # noqa: S310 (local trusted URL)
+            with urllib.request.urlopen(request, timeout=self._request_timeout) as resp:  # noqa: S310 (local trusted URL)
                 return json.loads(resp.read())
-        except urllib.error.URLError as exc:
-            raise RuntimeError(
-                f"ComfyUI unreachable at {self._base_url} (is the server running?): {exc}"
-            ) from exc
+        except (urllib.error.URLError, TimeoutError) as exc:
+            msg = (
+                f"ComfyUI unreachable or unresponsive at {self._base_url} "
+                f"(is the server running?): {exc}"
+            )
+            raise RuntimeError(msg) from exc
 
     def _get_bytes(self, path: str) -> bytes:
         try:
-            with urllib.request.urlopen(self._base_url + path) as resp:  # noqa: S310
+            url = self._base_url + path
+            with urllib.request.urlopen(url, timeout=self._request_timeout) as resp:  # noqa: S310
                 return resp.read()
-        except urllib.error.URLError as exc:
-            raise RuntimeError(
-                f"ComfyUI unreachable at {self._base_url} (is the server running?): {exc}"
-            ) from exc
+        except (urllib.error.URLError, TimeoutError) as exc:
+            msg = (
+                f"ComfyUI unreachable or unresponsive at {self._base_url} "
+                f"(is the server running?): {exc}"
+            )
+            raise RuntimeError(msg) from exc

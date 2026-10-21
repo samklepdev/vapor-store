@@ -1,3 +1,5 @@
+import urllib.request
+
 import pytest
 
 from tools.producer.providers import ComfyUIProvider, GenRequest, Provider
@@ -81,3 +83,14 @@ def test_generate_raises_when_no_images(monkeypatch):
     monkeypatch.setattr(p, "_get_json", lambda path: history)
     with pytest.raises(RuntimeError, match="no images"):
         p.generate(GenRequest(prompt="x", n=1, slug="s"))
+
+
+def test_timeout_surfaces_as_runtime_error(monkeypatch):
+    p = _provider()
+
+    def _boom(*args, **kwargs):
+        raise TimeoutError("slow server")
+
+    monkeypatch.setattr(urllib.request, "urlopen", _boom)
+    with pytest.raises(RuntimeError, match="unresponsive"):
+        p._get_json("/history/x")
