@@ -44,7 +44,9 @@ class FluxFalProvider:
 
         import fal_client
 
-        os.environ.setdefault("FAL_KEY", self._api_key)
+        # Config-loaded key always wins; setdefault would silently honor a
+        # stale FAL_KEY left in the environment instead of config.toml.
+        os.environ["FAL_KEY"] = self._api_key
         result = fal_client.subscribe(
             self._model,
             arguments={
