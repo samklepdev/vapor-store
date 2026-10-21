@@ -1,6 +1,6 @@
 # Gumroad listings — psychedelia wall art (2026-10-21)
 
-**Channel:** Gumroad. **Status:** drafted, awaiting owner upload + publish.
+**Brand:** VaporStudio42 (psychedelia collection). **Channel:** Gumroad. **Status:** drafted, awaiting owner upload + publish.
 **Audience note:** different buyer than battlestation — trippy/visionary/festival/
 meditation-space art, music fans, blacklight/rave. Tune tags accordingly.
 **Files per product:** matching `ps-…-4x.png` (4096²) from
@@ -9,7 +9,9 @@ meditation-space art, music fans, blacklight/rave. Tune tags accordingly.
 > *Made with AI tools, designed and curated by Sam. Original art — no trademarks,
 > logos, or third-party characters. Digital download for personal use.*
 
-**Pricing:** $5 each single, or a **10-print set ~$25** (bundle = easiest first sale).
+**Pricing:** $5 per single (or PWYW $5+); **3-print mini-set $10**; **10-print
+psychedelia set $24** (anchor bundle). Week-1 launch discount code to seed first
+sales + reviews. Gumroad takes ~10%.
 Format: square 4096×4096 px PNG, print-ready.
 **Tags:** psychedelic, trippy, visionary art, mandala, fractal, sacred geometry,
 blacklight, festival, meditation, rave, surreal, digital download, printable wall art.
