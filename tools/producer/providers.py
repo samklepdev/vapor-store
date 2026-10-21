@@ -198,6 +198,56 @@ class ComfyUIProvider:
         )
         return self._get_bytes(f"/view?{query}")
 
+    def upscale(
+        self,
+        image: bytes,
+        *,
+        slug: str = "upscaled",
+        model: str = "RealESRGAN_x4plus.pth",
+    ) -> bytes:
+        name = self._upload_image(image, f"{slug}.png")
+        prompt_id = self._submit(self._build_upscale_workflow(name, model, slug))
+        refs = self._await_images(prompt_id)
+        return self._download(refs[0])
+
+    def _build_upscale_workflow(self, image_name: str, model: str, slug: str) -> dict:
+        return {
+            "10": {"class_type": "LoadImage", "inputs": {"image": image_name}},
+            "11": {"class_type": "UpscaleModelLoader", "inputs": {"model_name": model}},
+            "12": {
+                "class_type": "ImageUpscaleWithModel",
+                "inputs": {"upscale_model": ["11", 0], "image": ["10", 0]},
+            },
+            "13": {
+                "class_type": "SaveImage",
+                "inputs": {"images": ["12", 0], "filename_prefix": slug},
+            },
+        }
+
+    def _upload_image(self, data: bytes, filename: str) -> str:
+        boundary = uuid.uuid4().hex
+        body = b"".join(
+            [
+                f"--{boundary}\r\n".encode(),
+                f'Content-Disposition: form-data; name="image"; filename="{filename}"\r\n'.encode(),
+                b"Content-Type: image/png\r\n\r\n",
+                data,
+                f"\r\n--{boundary}--\r\n".encode(),
+            ]
+        )
+        request = urllib.request.Request(
+            self._base_url + "/upload/image",
+            data=body,
+            headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+            method="POST",
+        )
+        resp = json.loads(self._open(request))
+        name = resp.get("name")
+        if not name:
+            raise RuntimeError(f"ComfyUI /upload/image returned no name: {resp}")
+        subfolder = resp.get("subfolder")
+        return f"{subfolder}/{name}" if subfolder else name
+
     def _post_json(self, path: str, payload: dict) -> dict:
         request = urllib.request.Request(
             self._base_url + path,
