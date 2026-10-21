@@ -92,3 +92,11 @@ Miami Dusk · Sunset Grid CRT. Each a square 4096×4096 px PNG, print-ready up t
 Instant download; print at home or any print shop. *(+ shared disclosure)*
 **Tags:** vaporwave, synthwave, battlestation, wall art set, print bundle, desk setup,
 printable, retrowave, aesthetic, neon, digital download, gallery wall.
+
+## Discovery & tags
+Gumroad's own search barely drives sales (its "Discover" marketplace costs ~30%
+vs ~10% direct), so external channels are the real lever.
+- **Gumroad tags (~8):** vaporwave, synthwave, battlestation, wall art, printable, desk setup, retrowave, digital download
+- **Pinterest (your #1 channel — keywords in pin title/description + hashtags):** #vaporwave #battlestation #desksetup #gamingsetup #synthwave #retrowave #aestheticroom #printableart #wallart #80saesthetic #neonaesthetic #outrun
+- **Reddit (subs, NOT hashtags; share as "I made these", follow each sub's self-promo rules):** r/battlestations, r/vaporwave, r/outrun, r/VaporwaveAesthetics
+- **Bundle cover:** `mockups/bundle-battlestation-cover.png` (grid of all 6).
