@@ -55,7 +55,13 @@ class FluxFalProvider:
                 "num_images": req.n,
             },
         )
-        return [img["url"] for img in result["images"]]
+        # Python fal_client returns top-level `images`; some fal responses nest
+        # under `data`. Accept either and fail loudly rather than silently
+        # producing zero files on an unexpected shape.
+        images = result.get("images") or result.get("data", {}).get("images")
+        if not images:
+            raise RuntimeError(f"fal response had no images; keys={list(result)}")
+        return [img["url"] for img in images]
 
     def _download(self, url: str) -> bytes:
         import urllib.request
