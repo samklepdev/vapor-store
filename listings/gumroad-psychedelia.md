@@ -106,3 +106,11 @@ Dreamscape · Cosmic Portal (×2) · Fractal Kaleidoscope (×2). Each a square 4
 PNG, print-ready up to ~27″. Instant download; print anywhere. *(+ shared disclosure)*
 **Tags:** psychedelic, trippy, visionary art, mandala, fractal, wall art set, print
 bundle, sacred geometry, festival, blacklight, meditation, digital download.
+
+## Discovery & tags
+Gumroad search barely drives sales (Discover costs ~30% vs ~10% direct) — external
+channels are the real lever.
+- **Gumroad tags (~8):** psychedelic, trippy, visionary art, mandala, fractal, wall art, printable, digital download
+- **Pinterest (keywords in pin title/description + hashtags):** #psychedelicart #trippyart #mandala #fractalart #visionaryart #festivalart #blacklight #sacredgeometry #trippywallart #psychedelicposter #ravedecor
+- **Reddit (subs, no spam):** r/psychedelicart, r/trippy, r/visionaryart, r/mandalas
+- **Bundle cover:** `mockups/bundle-psychedelia-cover.png` (grid of all 10).
