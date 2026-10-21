@@ -88,12 +88,15 @@ each loop by hand:
    keep only ≥2-on-all-four; copy keepers to `pipeline/04-approved/`.
 5. **Finish** — hand-finish keepers in your own design tools (this is the edge).
 6. **Upscale + package** — drafts are 1024² (not print-ready): run each keeper
-   through the upscale pass → ~4096² print master in `pipeline/05-packaged/<date>/`:
+   through the upscale pass → ~4096² print master, then generate a framed-wall
+   cover for the listing:
    ```
    python -m tools.producer.upscale pipeline/04-approved/<file>.png
+   python -m tools.producer.mockup pipeline/05-packaged/<date>/<file>-4x.png
    ```
-   Then assemble the deliverable (print-res file(s) + a short "how to print" note),
-   a preview/mockup, and the title/description/tags.
+   The master lands in `pipeline/05-packaged/<date>/`, the cover in its `mockups/`
+   subfolder. Then assemble the deliverable (print master + a short "how to print"
+   note) and the title/description/tags; use the mockup as the listing's cover image.
 7. **Publish (🚪 Gate 2)** — list it yourself on the current sales channel, with
    the honest AI disclosure ("made with AI tools, designed and curated by Sam").
    Human publishes (ToS-clean). **Current M1 channel: Gumroad** (see note below).
