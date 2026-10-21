@@ -91,7 +91,18 @@ Same as the battlestation set (`listings/gumroad-battlestation.md`): New product
 Digital → title/description/tags from above, attach the `ps-…-4x.png` +
 `HOW-TO-PRINT.txt`, set price, publish, share.
 
-## Bundle option (recommended)
-One product **"Psychedelia Collection — 10 Trippy Prints"**, all ten `-4x.png` +
-the note, ~$25. Consider themed sub-bundles too (e.g. "3 Mandalas", "Cosmic Pair")
-for lower price points.
+## Bundle product (recommended) — $24
+Attach all ten `-4x.png` + `HOW-TO-PRINT.txt`. (Themed sub-bundles — "3 Mandalas",
+"Cosmic Pair" — make good lower-priced add-ons later.)
+
+**Title:** Psychedelia Wall Art Collection — 10 Trippy Prints | Visionary Printable Set
+**Description:**
+The whole trip in one download. Ten original psychedelic prints — mandalas,
+fractals, liquid light, cosmic portals and melting dreamscapes — in saturated jewel
+tones, built to pull the eye and fill a wall. Perfect for a festival room, meditation
+space, blacklight setup, or a gloriously loud living room.
+**Included (10):** Botanical Trip (×2) · Liquid Light · Sacred Mandala (×2) · Melting
+Dreamscape · Cosmic Portal (×2) · Fractal Kaleidoscope (×2). Each a square 4096×4096 px
+PNG, print-ready up to ~27″. Instant download; print anywhere. *(+ shared disclosure)*
+**Tags:** psychedelic, trippy, visionary art, mandala, fractal, wall art set, print
+bundle, sacred geometry, festival, blacklight, meditation, digital download.
