@@ -24,3 +24,6 @@ __pycache__/
 # style-bible private reference anchors (external images; public repo -> never commit)
 style-bible/refs/*
 !style-bible/refs/README.md
+
+# private business metrics (public repo -> don't commit real numbers)
+reports/signal-log.csv
