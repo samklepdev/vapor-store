@@ -6,14 +6,15 @@ Paste-ready pins below. You create the pins; this is the copy + image + link for
 ## One-time setup
 1. **Business account** (free) — unlocks analytics + rich pins. Convert if personal.
 2. **Create 2 boards:** "Vaporwave Battlestation Art" and "Psychedelic / Trippy Wall Art".
-3. **Image tip:** vertical **2:3 (1000×1500)** pins perform best. Your art is square —
-   it still works, but ask me to generate vertical pin versions (art + title banner) to
-   maximize reach. Pin consistently (a few/week); fresh pins beat re-pins.
+3. **Images: ready-made vertical pins.** Optimized 2:3 (1000×1500) pins for all 18
+   products are in `pipeline/05-packaged/2026-10-21/pins/` as `pin-<slug>.png`
+   (art + title + VaporStudio42 banner). Use these — vertical pins outperform square.
+   Pin consistently (a few/week); fresh pins beat re-pins.
 
 ---
 
 ## Pin 1 — Neon Night Desk (LIVE)
-- **Image:** `pipeline/05-packaged/2026-10-21/bs-night-neon-001-4x.png` (or its framed mockup)
+- **Image:** `pins/pin-bs-night-neon-001.png` (vertical 2:3)
 - **Board:** Vaporwave Battlestation Art
 - **Link:** https://vaporwave4242.gumroad.com/l/kixywd
 - **Title:** Vaporwave Battlestation Wall Art — Neon Night Desk (Printable)
@@ -24,7 +25,7 @@ Paste-ready pins below. You create the pins; this is the copy + image + link for
   #vaporwave #battlestation #desksetup #gamingsetup #synthwave #retrowave #aestheticroom #printableart #wallart #80saesthetic #neonaesthetic #outrun
 
 ## Pin 2 — Psychedelia Collection (LIVE, bundle)
-- **Image:** `pipeline/05-packaged/2026-10-21/mockups/bundle-psychedelia-cover.png` (collage shows all 10)
+- **Image:** `pins/pin-psychedelia-set.png` (vertical 2:3; collage of all 10)
 - **Board:** Psychedelic / Trippy Wall Art
 - **Link:** https://vaporwave4242.gumroad.com/l/wssbhs
 - **Title:** Psychedelic Wall Art Set — 10 Trippy Prints (Mandalas, Fractals, Cosmic)
